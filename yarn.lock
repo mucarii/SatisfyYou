@@ -4392,6 +4392,15 @@ safe-regex-test@^1.0.3:
     es-errors "^1.3.0"
     is-regex "^1.1.4"
 
+"SatisfyingYou@file:":
+  version "0.0.1"
+  resolved "file:"
+  dependencies:
+    react "18.3.1"
+    react-native "0.75.4"
+    SatisfyingYou "file:"
+    SatisfyYou "file:"
+
 "SatisfyYou@file:":
   version "0.0.1"
   resolved "file:"
