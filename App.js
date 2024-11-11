@@ -1,135 +1,79 @@
-// Importação
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import 'react-native-gesture-handler'; 
+import Login from './src/components/screens/Login'
+import Cadastro from './src/components/screens/Cadastro'
+import RecuperarSenha from './src/components/screens/RecuperarSenha'
+import AgradecimentoParticipacao from './src/components/screens/AgradecimentoParticipacao'
 
-// Definição do componente App
+const Stack = createStackNavigator()
+
 const App = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen 
+                    name="Login" 
+                    component={Login} 
+                    options={{ headerShown: false }} 
+                />
+                <Stack.Screen 
+                    name="Cadastro" 
+                    component={Cadastro}
+                    options={{
+                        title: 'Nova Conta',
+                        headerStyle: estilos.headerDefault,
+                        headerTitleStyle: estilos.headerTitle,
+                        headerLeftContainerStyle: estilos.headerLeft,
+                        headerTintColor: '#372775',
+                        headerBackTitle: null,
+                        headerBackImageStyle: estilos.navigationBackImage,
+                    }}
+                />
+                <Stack.Screen 
+                    name="RecuperarSenha" 
+                    component={RecuperarSenha} 
+                    options={{
+                        title: 'Recuperação de Senha',
+                        headerStyle: estilos.headerDefault,
+                        headerTitleStyle: estilos.headerTitle,
+                        headerTintColor: '#372775',
+                    }}
+                />
+                <Stack.Screen 
+                    name="AgradecimentoParticipacao" 
+                    component={AgradecimentoParticipacao} 
+                    options={{
+                        title: 'Obrigado!',
+                        headerStyle: estilos.headerDefault,
+                        headerTitleStyle: estilos.headerTitle,
+                        headerTintColor: '#372775',
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
+}
 
-  const handleLogin = () => {
-    // Lógica de validação de login
-    if (email === 'jurandir.pereira@hotmail.com' && password === '123456') {
-      setErrorMessage('');
-      // Navegar para a próxima tela, se a validação for bem-sucedida
-    } else {
-      setErrorMessage('E-mail e/ou senha inválidos.');
+const estilos = StyleSheet.create({
+    headerDefault: {
+        backgroundColor: '#2B1D62',
+        height: 50,
+    },
+    headerTitle: {
+        color: '#fff',
+        fontWeight: '400',
+        fontSize: 24,
+        fontFamily: 'AveriaLibre-Regular',
+    },
+    headerLeft: {
+        paddingLeft: 0,
+    },
+    navigationBackImage: {
+        width: 60,
+        height: 60,
     }
-  };
+})
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Satisfying.you <Text style={styles.smile}>😊</Text></Text>
-
-      <Text style={styles.rotulo} >E-mail</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="E-mail"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
-        placeholderTextColor="#B0B0B0"
-      />
-
-<Text style={styles.rotulo} >Senha</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={setPassword}
-        placeholderTextColor="#B0B0B0"
-      />
-
-      {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.buttonNewAccount}>
-        <Text style={styles.link}>Criar minha conta</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.buttonForgot}>
-        <Text style={styles.link}>Esqueci minha senha</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-// Estilos
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#372775',
-  },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Averia Libre',
-    fontWeight: 'Regular',
-    color: '#ffffff',
-    marginBottom: 40,
-  },
-  smile: {
-    fontSize: 24,
-  },
-  input: {
-    width: '100%',
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ffffff',
-    backgroundColor: '#ffffff',
-    color: '#000',
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: '#37BD6D',
-    padding: 15,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  link: {
-    color: '#FFFFFF',
-    marginTop: 10,
-    fontSize: 16,
-  },
-  errorText: {
-    color: '#FD7979',
-    marginBottom: 20,
-    alignSelf: 'flex-start',
-  },
-  buttonNewAccount: {
-    backgroundColor: '#419ED7',
-    padding: 1,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  buttonForgot: {
-    backgroundColor: '#B0CCDE',
-    padding: 1,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  rotulo:{
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Averia Libre',
-    alignSelf: 'flex-start',
-    marginBottom: 5,
-  },
-});
-
-// Exportação
-export default App;
+export default App
